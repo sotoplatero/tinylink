@@ -19,11 +19,17 @@
         items-center 
         justify-center
         ">
-        <div class="my-16 mx-32  relative" >
+        <div class="my-16 mx-32 w-9/12 relative" >
 
             <!-- <div class="absolute inset-0 bg-black shadow-lg transform translate-x-4 translate-y-4"></div> -->
 
-            <div class="relative w-full p-24 bg-{{= it.bgfrom || 'yellow-200' }} border-{{= it.bgto || 'yellow-500' }} border-b-8 ">
+            <div 
+                class="
+                    relative w-full p-24 
+                    bg-{{= it.bgfrom || 'yellow-200' }} 
+                    border-{{= it.bgto || 'yellow-500' }} 
+                    border-b-8"
+            >
 
                 <h1 class="
                     text-{{= it.size || '6xl' }} 

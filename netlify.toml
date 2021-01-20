@@ -8,7 +8,12 @@ publish = "public"
 
 [[redirects]]
 from = "/card"
-to = "/.netlify/functions/socialcard"
+to = "/.netlify/functions/card"
+status = 200
+
+[[redirects]]
+from = "/card.jpg"
+to = "/.netlify/functions/card"
 status = 200
 
 [[redirects]]

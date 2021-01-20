@@ -11,7 +11,7 @@ const localChrome = process.env.PATH_CHROME;
 exports.handler = async (event, context) => {
 
     let {
-        url,
+        url = 'https://usecard.netlify.app',
         bg = '',
         color = '',
         size,
