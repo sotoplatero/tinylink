@@ -8,6 +8,7 @@ const themes = readable([
 	'quote', 
 	'modal',
 	'nowthis',
+	'yinyang',
 ]); // dark mode
 const fonts = readable([ 
 	'Inter',

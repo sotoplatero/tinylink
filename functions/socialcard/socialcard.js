@@ -73,7 +73,6 @@ exports.handler = async (event, context) => {
             statusCode: 200,
             headers: { 
             	'Content-type': 'image/jpeg', 
-                'Cache-Control': 'no-store',
             },
             body: screenshot,   
             isBase64Encoded: true            
