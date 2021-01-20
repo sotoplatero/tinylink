@@ -19,22 +19,22 @@
         items-center 
         justify-center
         ">
-        <div class="my-16 mx-20 relative" >
+        <div class="my-16 mx-32 w-9/12 relative" >
 
             <!-- <div class="absolute inset-0 bg-black shadow-lg transform translate-x-4 translate-y-4"></div> -->
 
             <div 
                 class="
-                    relative w-full px-16 py-12 
+                    relative w-full p-24 
                     bg-{{= it.bgfrom || 'yellow-200' }} 
                     border-{{= it.bgto || 'yellow-500' }} 
                     border-b-8"
             >
 
                 <h1 class="
-                    text-6xl
+                    text-{{= it.size || '6xl' }} 
                     font-bold 
-                    leading-snug
+                    leading-normal
                 ">
                     <span class="
                         bg-clip-text 
@@ -43,13 +43,13 @@
                         from-{{= it.colorfrom || 'gray-900' }} 
                         to-{{= it.colorto || 'gray-900' }}
                     ">
-                        &#8220;{{= it.title }}&#8221;
+                        &#8220; {{= it.title }} &#8221;
                     </span>
                 </h1>
 
-                <div class="text-right text-3xl mt-4">
+                <div class="text-right text-3xl mt-10 ">
                     <span class="">&mdash;<span>
-                    <i>{{= it.author || it.publisher || it.domain }}</i>
+                    <i>{{= it.publisher || it.domain }}</i>
                 </div>
 
             </div>

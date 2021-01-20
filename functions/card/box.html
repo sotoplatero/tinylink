@@ -23,17 +23,17 @@
         from-{{= it.bgfrom || 'gray-800'}} 
         to-{{= it.bgto || 'gray-800'}} 
     ">
-        <div class="my-16 mx-24  relative" >
+        <div class="my-16 mx-32  relative" >
 
             <!-- <div class="absolute inset-0 bg-black shadow-lg transform translate-x-4 translate-y-4"></div> -->
 
-            <div class="relative px-16 py-10 bg-white rounded-3xl">
+            <div class="relative px-24 py-16 bg-white rounded-3xl">
 
                 <h1 class="
-                    text-{{= it.size || '5xl' }} 
+                    text-{{= it.size || '6xl' }} 
                     text-center 
                     font-bold 
-                    leading-snug
+                    leading-normal
                 ">
                     <span 
                         class="
@@ -48,11 +48,11 @@
                 </h1>
 
                 {{? it.description }}
-                    <p class="text-4xl text-gray-600 mt-6 line-clamp">{{=it.description}}</p>
+                    <p class="text-4xl text-gray-600 mt-8 line-clamp">{{=it.description}}</p>
                 {{?}}
 
-                <div class="flex items-center justify-center leading-snug text-3xl mt-4">
-                    <img src="{{=it.logo}}" class="h-10 w-10 rounded-lg mr-4" >
+                <div class="flex items-center justify-center text-4xl mt-10">
+                    <img src="https://unavatar.now.sh/{{=it.domain}}" class="h-12 w-12" >
                     {{= it.publisher || it.domain}}
                 </div>
 

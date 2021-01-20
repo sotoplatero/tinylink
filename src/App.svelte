@@ -26,8 +26,8 @@
   $: if ( colorFrom && colorTo) color = colorFrom + '_' + colorTo;
 
   $: {
-    src = `/api/card?url=${url}&theme=${theme}`;
-    src += bg ? `&bg=${bg}` : ''; 
+    src = `/card?url=${url}&theme=${theme}`;
+    src += bg ? `&bg=${bg}` : '';
     src += color ? `&color=${color}` : '';
     src += font ? `&font=${font}` : '';
     encodeURI(src);
