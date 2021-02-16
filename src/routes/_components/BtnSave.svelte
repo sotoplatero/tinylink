@@ -2,7 +2,7 @@
     export let profile
     let saving = false
 
-    $: disabled =( profile.name.trim.length===0 && profile.links.length===0 ) || saving
+    $: disabled = profile.name.trim().length===0 || profile.links.length===0 || saving
 
     async function save(){
         saving = true
