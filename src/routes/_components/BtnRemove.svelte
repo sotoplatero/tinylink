@@ -2,16 +2,22 @@
     export let profile
     export let index
 
-    async function remove() {
-        let response = await fetch(`/api/delete`,{
-            method: 'POST',
-            body: {
-                id: profile.id,
-                index: index
-            }
-        })
+    function remove(e) {
+        // profile.links.splice(index,1)
+        // let response = await fetch(`/api/remove`,{
+        //     method: 'POST',
+        //     body: JSON.stringify({
+        //         id: profile.id,
+        //         index: index
+        //     })
+        // })
 
-        profile = await response.json()
+        // profile = await response.json()
+
+        // if (typeof window !== 'undefined') {
+        //     localStorage.setItem('profile',JSON.stringify(profile))
+        // }       
+        console.log(index) 
     }
 </script>
 

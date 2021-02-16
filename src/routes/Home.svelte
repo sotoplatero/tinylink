@@ -1,9 +1,9 @@
 <script>
+    import { fade } from 'svelte/transition';    
     import InputLink from './_components/InputLink.svelte'
     import Avatar from './_components/Avatar.svelte'
     import BtnSave from './_components/BtnSave.svelte'
     import BtnRemove from './_components/BtnRemove.svelte'
-	import { onMount } from 'svelte';
 
     let profile = {
             name: '', 
@@ -16,6 +16,12 @@
     }
 
     $: profile.avatar = profile.links.length ?  profile.links.find(el=>el.avatar).avatar : ''
+
+    function remove(index) {
+        profile.links.splice(index,1)
+        profile=profile
+    }
+    
 </script>
 
 <svelte:head>
@@ -52,8 +58,10 @@
                     <InputLink bind:links={profile.links} />
                 </div>                
                 <div class="space-y-2">
-                    {#each profile.links as link,index}
-                        <div class="flex items-center ">
+                    {#each profile.links as link,index (index)}
+                        <div
+                            transition:fade
+                            class="flex items-center px-4 py-3 border-gray-100 bg-gray-50 hover:bg-gray-100transition rounded-lg border">
                             <a 
                                 href="{link.url}" 
                                 target="_blank" 
@@ -62,13 +70,7 @@
                                     flex 
                                     items-center 
                                     inline-block 
-                                    px-4 py-3 
-                                    w-full 
-                                    border
-                                    border-gray-100
-                                    bg-gray-50
-                                    hover:bg-gray-100 
-                                    transition rounded-lg"
+                                    w-full"
                             >
                                 <img 
                                     src="{link.logo}" 
@@ -79,13 +81,14 @@
                                     <div class="font-semibold">{link.publisher}</div> 
                                     <div class="text-gray-500">{link.title}</div> 
                                 </div>
-                                <div>
-                                    <!-- <BtnRemove bind:profile {index}/> -->
-                                    <svg class="w-6 h-6 inline text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                      </svg>                                        
-                                </div>
                             </a>
+                            <div>
+                                <button on:click|capture={()=>remove(index)}>
+                                    <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>      
+                                </button>
+                            </div>
                         </div>
                     {/each}
                 </div>
