@@ -1,20 +1,5 @@
 [build]
-publish = "public"
-functions = "functions"
-
-[dev]
-functions = "functions"
-publish = "public"
-
-[[redirects]]
-from = "/card"
-to = "/.netlify/functions/card"
-status = 200
-
-[[redirects]]
-from = "/card.jpg"
-to = "/.netlify/functions/card"
-status = 200
+functions = "api"
 
 [[redirects]]
 from = "/api/*"
