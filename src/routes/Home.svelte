@@ -111,8 +111,10 @@
     </main>
 
     <footer class="text-center my-8">
-        <p class="text-sm">This is a test</p>
-        <p><a href="https://twitter.com/sotoplatero">@sotoplatero</a></p>
+        <p class="text-sm text-gray-600">
+            Made with &#9995; and &#128147; at &#127968; by <a href="https://twitter.com/sotoplatero" class="text-blue-500">@sotoplatero</a><br>
+        </p>
+        <p class="text-sm text-gray-500 mt-2">This is a test</p>
     </footer>
 </div>
 
