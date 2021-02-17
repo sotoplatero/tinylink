@@ -1,12 +1,12 @@
 <script>
     export let avatar;
 </script>
-<span class="inline-block h-20 w-20 rounded-full overflow-hidden bg-gray-100 mx-auto">
+<div class="h-20 w-20 rounded-full overflow-hidden mx-auto">
     {#if avatar}
         <img src="{avatar}" class="h-full w-full text-gray-300" alt="Avatar">
-    {:else}        
-        <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z"></path>
-        </svg>
+    {:else}      
+      <svg class="h-20 w-20 text-gray-400"  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>       
     {/if }
-</span>
+</div>

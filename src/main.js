@@ -4,8 +4,6 @@ import "../public/global.css";
 const app = new App({
     target: document.body,
     hydrate: true,
-    props: {
-    }
 });
 
 export default app;
