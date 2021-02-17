@@ -103,7 +103,12 @@
             </div>
 
         </div>
-        <div class="mt-12 space-y-2">
+        <div class="my-10">
+            <svg class="h-6 w-6 mx-auto text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+              </svg>            
+        </div>
+        <div class="space-y-2">
             <BtnSave bind:profile/>
             {#if profile.slug}
                 <a  href="/{profile.slug}" 
