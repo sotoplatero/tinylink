@@ -23,6 +23,7 @@
         "tailwindcss": "^2.0.2"
     },
     "dependencies": {
+        "@auth0/auth0-spa-js": "^1.13.6",
         "@octokit/rest": "^18.1.1",
         "got": "^11.8.1",
         "metascraper": "^5.18.2",
