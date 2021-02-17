@@ -49,7 +49,7 @@
                     name="`name`"
                     placeholder="Name"
                     bind:value={profile.name}
-                    class="w-full p-3 border rounded-lg focus:ring-blue-500 focus:ring-2 outline-none" 
+                    class="w-full p-3 border rounded-lg focus:ring-blue-500 focus:ring-2 outline-none border-gray-300" 
                 />    
             </div>
 
@@ -102,25 +102,25 @@
     
             </div>
 
+            <div class="space-y-2">
+                <BtnSave bind:profile/>
+                {#if profile.slug}
+                    <a  href="/{profile.slug}" 
+                        target="_blank"
+                        class="flex items-center justify-center block w-full text-center p-4 text-purple-500 font-bold hover:bg-purple-50 transition rounded-lg">
+                        <span>Visit</span>
+                        <svg class="h-4 w-4 inline ml-2 opacity-75" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>                    
+                    </a>
+                {/if}
+            </div>  
         </div>
-        <div class="my-10">
+        <!-- <div class="my-10">
             <svg class="h-6 w-6 mx-auto text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
               </svg>            
-        </div>
-        <div class="space-y-2">
-            <BtnSave bind:profile/>
-            {#if profile.slug}
-                <a  href="/{profile.slug}" 
-                    target="_blank"
-                    class="flex items-center justify-center block w-full text-center p-4 text-purple-500 font-bold hover:bg-purple-50 transition rounded-lg">
-                    <span>Visit</span>
-                    <svg class="h-4 w-4 inline ml-2 opacity-75" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>                    
-                </a>
-            {/if}
-        </div>  
+        </div> -->
     </main>
 
     <footer class="text-center my-8">
