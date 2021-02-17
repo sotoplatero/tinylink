@@ -1,52 +1,22 @@
-import { writable } from 'svelte/store'
 
-function createUser() {
-  const localUser = JSON.parse(localStorage.getItem('gotrue.user'))
+// src/store.js
 
-  let u = null
-  if (localUser) {
-    u = {
-      username: localUser.user_metadata.full_name,
-      email: localUser.email,
-      access_token: localUser.token.access_token,
-      expires_at: localUser.token.expires_at,
-      refresh_token: localUser.token.refresh_token,
-      token_type: localUser.token.token_type,
-    }
+import { writable, derived } from "svelte/store";
+
+export const isAuthenticated = writable(false);
+export const user = writable({});
+export const popupOpen = writable(false);
+export const error = writable();
+
+export const tasks = writable([]);
+
+export const user_tasks = derived([tasks, user], ([$tasks, $user]) => {
+  let logged_in_user_tasks = [];
+
+  if ($user && $user.email) {
+    logged_in_user_tasks = $tasks.filter((task) => task.user === $user.email);
   }
-  const { subscribe, set } = writable(u)
 
-  return {
-    subscribe,
-    login(user) {
-      const currentUser = {
-        username: user.user_metadata.full_name,
-        email: user.email,
-        access_token: user.token.access_token,
-        expires_at: user.token.expires_at,
-        refresh_token: user.token.refresh_token,
-        token_type: user.token.token_type,
-      }
-      set(currentUser)
-    },
-    logout() {
-      set(null)
-    },
-  }
-}
+  return logged_in_user_tasks;
+});
 
-function createRedirectURL() {
-  const { subscribe, set } = writable('')
-  return {
-    subscribe,
-    setRedirectURL(url) {
-      set(url)
-    },
-    clearRedirectURL() {
-      set('')
-    },
-  }
-}
-
-export const user = createUser()
-export const redirectURL = createRedirectURL()
