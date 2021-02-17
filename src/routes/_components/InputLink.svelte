@@ -1,4 +1,5 @@
 <script>
+ 
     export let links 
 
     let link;
@@ -15,6 +16,9 @@
 
         if (/\.(jpg|png|gif)$/.test(link)) {
 
+        } else if ( /^https\:\/\/formspree\.io\/f\//.test(link) ) {
+            links = [...links, link]
+            return
         } else if ( /^http(s)?\:\/\//.test(link) ) {
             let response = await fetch(`https://api.microlink.io/?url=${link}`);
             let {data} = await response.json()

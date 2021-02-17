@@ -1,6 +1,7 @@
 
 <script>
     import Avatar from './_components/Avatar.svelte'
+    import Contact from './_components/Contact.svelte'
 
     export let slug
 
@@ -70,6 +71,8 @@
                                     </svg>                
                                 </div>
                             </a>
+                        {:else if /^https\:\/\/formspree\.io\/f\//.test(link)}
+                            <Contact url={link} />
                         {:else}
                             <div class="font-semibold text-lg px-4 py-3 text-center w-full">
                                 {link}
