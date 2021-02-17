@@ -11,8 +11,11 @@
     }
     
     async function add(e) {
-        if (!links.some(el=>el.url===link)) {
+        if (links.some(el=>el.url===link)) return
 
+        if (/\.(jpg|png|gif)$/.test(link)) {
+
+        } else if ( /^http(s)?\:\/\//.test(link) ) {
             let response = await fetch(`https://api.microlink.io/?url=${link}`);
             let {data} = await response.json()
             links = [...links, {
@@ -22,8 +25,11 @@
                 logo: data.logo.url,
                 avatar: data.image?.url,
             }];
-            link = '';
+        } else {
+            links = [...links, link]
         }
+        
+        link = '';
     }
 </script>
 <div class="flex items-center space-x-2">
@@ -63,7 +69,7 @@
             focus:ring-2 
             focus:ring-offset-2 
             focus:ring-gray-500">
-        Add Link
+        Add
     </button>
 
 </div>
