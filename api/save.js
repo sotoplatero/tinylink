@@ -9,32 +9,39 @@ exports.handler = async (event) => {
     auth: process.env.GITHUB_TOKEN,
   });
   
-  profile = { 
-    id: profile.id || uuidv4(), 
-    slug: slug(profile.name), 
-    ...profile 
-  };
-
+  
   let options = {
     owner: 'sotoplatero',
     repo: 'db',
     path: 'tinylink.json',
   };
-
+  
+  // Get content JSON in repo
   const {data} = await octokit.repos.getContent(options)
   
   let content = Buffer.from( data.content, 'base64' ).toString('utf8');
   let tinylink = JSON.parse(content);
-  let existProfileIndex = tinylink.findIndex(el => el.id === profile.id )
   
+  // Generate unique slug
+  let slugName = slug(profile.name)
+  const slugsFinded = tinylink.filter(el=> (el.slug===slugName) && (el.id != profile.id) )
+  profile = { 
+    id: profile.id || uuidv4(), 
+    ...profile, 
+    slug: slugsFinded.length ? slugName + '-' + (slugsFinded.length + 1) : slugName,
+  };
+  
+  // Update or add Profile
+  let existProfileIndex = tinylink.findIndex(el => el.id === profile.id )
   if ( existProfileIndex !== -1 ){
 	  tinylink.splice( existProfileIndex, 1, profile )
   } else {
 	  tinylink = [...tinylink, profile ];
 	}
-
+  
+  // Update file in Repo
   var fileContent = Buffer.from( JSON.stringify(tinylink), 'utf8' ).toString('base64') 
-console.log(data.sha )
+  
   await octokit.repos.createOrUpdateFileContents({ 
     ...options, 
     message: '+',

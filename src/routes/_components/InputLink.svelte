@@ -64,11 +64,11 @@
             py-3 px-4 
             border border-transparent 
             shadow-sm 
-            font-medium 
+            font-semibold 
             rounded-md 
-            text-white 
-            bg-gray-600 
-            hover:bg-gray-700 
+            text-gray-800 
+            bg-gray-200 
+            hover:bg-gray-300 
             focus:outline-none 
             focus:ring-2 
             focus:ring-offset-2 

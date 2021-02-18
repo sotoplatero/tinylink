@@ -29,7 +29,7 @@
 	<title>Tinylink</title>
 </svelte:head>
 
-<div class="w-full px-2 sm:px-0 sm:w-96 min-h-screen mx-auto">
+<div class="w-full px-2 sm:px-0 sm:w-2/5 min-h-screen mx-auto">
 
     <header class="mb-4 mt-10 text-center">
         <svg class="h-12 w-12 text-pink-700 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -60,7 +60,18 @@
                     {#each profile.links as link,index (index)}
                         <div
                             transition:fade
-                            class="flex items-center px-4 py-3 border-gray-100 bg-gray-50 hover:bg-gray-100 transition rounded-lg border">
+                            class="
+                                flex 
+                                items-center justify-between 
+                                px-4 py-3 
+                                border-gray-100 
+                                bg-gray-50 
+                                hover:bg-gray-100 
+                                transition 
+                                rounded-lg 
+                                border"
+                        >
+
                             {#if typeof link === 'object' }
                                 
                                 <a 
@@ -83,14 +94,19 @@
                                         <div class="text-gray-500">{link.title}</div> 
                                     </div>
                                 </a>
+
                             {:else if /^https\:\/\/formspree\.io\/f\//.test(link)}
-                                <div>
-                                    <div></div>
+
+                                <div class="w-full">
                                     <Contact url={link} />
                                 </div>
+
                             {:else}
+
                                 <div class="font-semibold text-lg">{link}</div>
+
                             {/if}
+
                             <div class="ml-2">
                                 <button on:click|capture={()=>remove(index)}>
                                     <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -113,7 +129,15 @@
                 {#if profile.slug}
                     <a  href="/{profile.slug}" 
                         target="_blank"
-                        class="flex items-center justify-center block w-full text-center p-4 text-purple-500 font-bold hover:bg-purple-50 transition rounded-lg">
+                        class="flex 
+                            items-center 
+                            justify-center 
+                            block w-full 
+                            text-center p-4 
+                            text-blue-500 
+                            font-bold 
+                            hover:text-blue-600 
+                            transition rounded-lg">
                         <span>Visit</span>
                         <svg class="h-4 w-4 inline ml-2 opacity-75" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
