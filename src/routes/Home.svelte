@@ -29,7 +29,7 @@
 	<title>Tinylink</title>
 </svelte:head>
 
-<div class="w-full px-2 sm:px-0 sm:w-2/5 min-h-screen mx-auto">
+<div class="w-full px-2 sm:px-0 sm:w-1/2 lg:w-1/4 min-h-screen mx-auto">
 
     <header class="mb-4 mt-10 text-center">
         <svg class="h-12 w-12 text-pink-700 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -157,7 +157,6 @@
         <p class="text-sm text-gray-600">
             Made with &#9995; and &#128147; at &#127968; by <a href="https://twitter.com/sotoplatero" class="text-blue-500">@sotoplatero</a><br>
         </p>
-        <p class="text-sm text-gray-500 mt-2">This is a test</p>
     </footer>
 </div>
 

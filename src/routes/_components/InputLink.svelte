@@ -36,7 +36,8 @@
         link = '';
     }
 </script>
-<div class="flex items-center space-x-2">
+
+<div class="relative">
     <input 
         bind:value={link}
         on:keydown="{handleEnter}"
@@ -46,22 +47,23 @@
         autocomplete 
         placeholder="Ex. https://twitter.com/sotoplatero"
         class="
+            w-full
             p-3 border
             outline-none
             focus:ring-2 
             focus:ring-blue-500 
             focus:border-blue-500 
-            block 
-            w-full 
             border-gray-300 
-            rounded-md">    
+            pr-12
+            rounded-lg">    
     <button 
         on:click="{add}" 
         class="
+            absolute
+            right-2
+            top-2
             whitespace-nowrap
-            inline-flex 
-            justify-center 
-            py-3 px-4 
+            py-2 px-2 
             border border-transparent 
             shadow-sm 
             font-semibold 
@@ -73,7 +75,9 @@
             focus:ring-2 
             focus:ring-offset-2 
             focus:ring-gray-500">
-        Add
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+              </svg>
     </button>
 
 </div>
