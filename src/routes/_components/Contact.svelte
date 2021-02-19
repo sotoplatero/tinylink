@@ -17,13 +17,20 @@
     class="w-full space-y-2"
   >
     <label class="block">
-      <div>Email:</div>
-      <input type="text" name="_replyto" class="w-full border-gray-300  rounded-lg">
+      <!-- <div>Email:</div> -->
+      <input 
+        type="text" 
+        name="_replyto" 
+        class="w-full border-gray-300  rounded-lg" 
+        placeholder="Email">
     </label>
   
     <label class="block">
-      <div>Message:</div>
-      <textarea name="message" class="w-full border-gray-300  rounded-lg"></textarea>
+      <!-- <div>Message:</div> -->
+      <textarea 
+        name="message" 
+        class="w-full border-gray-300  rounded-lg"
+        placeholder="Write me a message"></textarea>
     </label>
   
     <!-- your other form fields go here -->
