@@ -64,7 +64,7 @@
             top-2
             whitespace-nowrap
             py-2 px-2 
-            border border-transparent 
+            border border-gray-300
             shadow-sm 
             font-semibold 
             rounded-md 
