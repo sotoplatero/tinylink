@@ -4,6 +4,7 @@
     import Contact from './_components/Contact.svelte'
     import Link from './_components/Link.svelte'
     import Title from './_components/Title.svelte'
+    import Image from './_components/Image.svelte'
     import { isContact, isTitle, isLink } from '../utils/types.js'
 
     export let slug
@@ -15,6 +16,7 @@
         if (isContact(link)) return Contact
         if (isTitle(link)) return Title
         if (isLink(link)) return Link
+        if (isImage(link)) return Image
     }
 
     async function getProfile() {
@@ -49,9 +51,9 @@
 
         {#if !error}
             <div class="my-10 sm:my-20 ">
-                <header class="text-center">
+                <header class="text-center mb-4">
                     <Avatar avatar={profile.avatar} />
-                    <h1 class="text-2xl font-semibold mb-12">
+                    <h1 class="text-2xl font-semibold">
                         {profile.name}
                     </h1>
 
@@ -59,6 +61,7 @@
                 <div class="space-y-2">
                     {#each profile.links as link}
                         <div class="flex items-center ">
+
                             <svelte:component 
                                 this={getComponent(link)} 
                                 {link}

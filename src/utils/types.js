@@ -6,11 +6,14 @@ module.exports = {
     isTitle: (link) => {
         return ( !/^http(s)?\:\/\//.test(link) && typeof link === 'string' )    
     },
-    isImg: (link) => {
+    isImage: (link) => {
         return ( /\.(jpg|png|gif)$/.test(link)  )    
     },
     isLink: (link) => {
         return ( typeof link === 'object' )    
+    },
+    isPDF: (link) => {
+        return ( /\.(pdf)$/.test(link)  )    
     },
 
 }

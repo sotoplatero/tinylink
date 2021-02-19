@@ -1,20 +1,22 @@
 <script>
     import { fade } from 'svelte/transition';    
     import InputLink from './_components/InputLink.svelte'
-    import Avatar from './_components/Avatar.svelte'
     import BtnSave from './_components/BtnSave.svelte'
-    import Contact from './_components/Contact.svelte'       
-    import BtnRemove from './_components/BtnRemove.svelte'
+    
+    import Avatar from './_components/Avatar.svelte'
+    import Contact from './_components/Contact.svelte'
+    import Link from './_components/Link.svelte'
+    import Title from './_components/Title.svelte'
+    import Image from './_components/Image.svelte'     
+    import { isContact, isTitle, isLink } from '../utils/types.js'    
 
-    let profile = {
+    let profileStr = JSON.stringify( {
             name: '', 
             avatar: null,
             links: []
-        }
+        })
 
-    // if (typeof window !== 'undefined') {
-        profile = JSON.parse( localStorage.getItem('profile') || JSON.stringify(profile) )
-    // }
+    let profile = JSON.parse( localStorage.getItem('profile') || profileStr )
 
     $: profile.avatar = profile.links.length ?  profile.links.find(el=>el.avatar)?.avatar : ''
 
@@ -22,7 +24,14 @@
         profile.links.splice(index,1)
         profile=profile
     }
-    
+
+    function getComponent(link) {
+        if (isContact(link)) return Contact
+        if (isTitle(link)) return Title
+        if (isLink(link)) return Link
+        if (isImage(link)) return Image
+    }
+
 </script>
 
 <svelte:head>
@@ -47,8 +56,8 @@
             <div>
                 <!-- <label for="`name`">Name</label> -->
                 <input
-                    name="`name`"
-                    placeholder="Name"
+                    name="name"
+                    placeholder="Profile Name"
                     bind:value={profile.name}
                     class="w-full p-3 border rounded-lg focus:ring-blue-500 focus:ring-2 outline-none border-gray-300" 
                 />    
@@ -58,62 +67,23 @@
                
                 <div class="space-y-2">
                     {#each profile.links as link,index (index)}
-                        <div
-                            transition:fade
-                            class="
-                                flex 
-                                items-center justify-between 
-                                px-4 py-3 
-                                border-gray-100 
-                                bg-gray-50 
-                                hover:bg-gray-100 
-                                transition 
-                                rounded-lg 
-                                border"
-                        >
+                        <div transition:fade class="relative"  >
 
-                            {#if typeof link === 'object' }
-                                
-                                <a 
-                                    href="{link.url}" 
-                                    target="_blank" 
-                                    alt="{link.title}" 
-                                    class="
-                                        flex 
-                                        items-center 
-                                        inline-block 
-                                        w-full"
+                            <svelte:component this={getComponent(link)} {link} /> 
+
+                            <div class="absolute top-0 right-0 -mt-2 -mr-1">
+                           
+                                <button 
+                                    title="Delete Link"
+                                    on:click={()=>remove(index)} 
+                                    class="text-gray-300 hover:text-red-500 transition transform hover:scale-150"
                                 >
-                                    <img 
-                                        src="{link.logo}" 
-                                        class="rounded-full h-8 w-8 inline mr-2" 
-                                        alt="{link.title}"
-                                    /> 
-                                    <div class="mr-auto leading-5">
-                                        <div class="font-semibold">{link.publisher}</div> 
-                                        <div class="text-gray-500">{link.title}</div> 
-                                    </div>
-                                </a>
-
-                            {:else if /^https\:\/\/formspree\.io\/f\//.test(link)}
-
-                                <div class="w-full">
-                                    <Contact url={link} />
-                                </div>
-
-                            {:else}
-
-                                <div class="font-semibold text-lg">{link}</div>
-
-                            {/if}
-
-                            <div class="ml-2">
-                                <button on:click|capture={()=>remove(index)}>
-                                    <svg class="h-6 w-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                    </svg>      
+                                    <svg class="h-4 w-4 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                      </svg>                                    
                                 </button>
-                            </div>
+                            </div>  
+
                         </div>
                     {/each}
                 </div>

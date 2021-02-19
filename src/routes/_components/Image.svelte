@@ -5,6 +5,4 @@
     src="{link}" 
     alt="Image"
     class="rounded-lg w-full"
->
-    {link}
-</img>
+/>
