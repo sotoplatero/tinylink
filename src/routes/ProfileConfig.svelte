@@ -42,13 +42,13 @@
 <!-- <Nav /> -->
 <div class="w-full px-2 sm:px-0 sm:w-2/5 min-h-screen mx-auto">
 
-    <!-- <header class="mb-4 mt-10 text-center">
+    <header class="mb-4 mt-10 text-center">
         <svg class="h-12 w-12 text-pink-700 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
           </svg>        
         <h1 class="text-3xl font-bold">Tinylink</h1>
         <p class="text-lg ">Create your link profile</p>
-    </header> -->
+    </header>
 
     <main class="">
         <div class="space-y-4">
