@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add sortablejs
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add express serverless-http
 
 PATH: 
   C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\bin\curl_7_50_1_openssl_nghttp2_x64;C:\bin\PortableGit\bin;C:\bin\mongodb\bin;C:\bin\DevKit\bin;C:\bin\rubyinstaller-2.5.0-1-x64\bin;C:\bin\laragon\bin\cmder;C:\ProgramData\chocolatey\bin;C:\WINDOWS\System32\OpenSSH\;C:\HashiCorp\Vagrant\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\bin\composer;C:\ProgramData\ComposerSetup\bin;C:\Program Files\Git\cmd;C:\bin\PortableGit\usr\bin;C:\bin\laragon\bin;C:\bin\laragon\bin\apache\httpd-2.4.25-win64-VC14\bin;C:\bin\laragon\bin\git\bin;C:\bin\laragon\bin\git\cmd;C:\bin\laragon\bin\git\mingw64\bin;C:\bin\laragon\bin\laragon\utils;C:\bin\laragon\bin\mysql\mysql-5.7.18-winx64\bin;C:\bin\laragon\bin\nginx\nginx-1.12.0;C:\bin\laragon\bin\ngrok;C:\bin\laragon\bin\notepad++;C:\bin\laragon\bin\php\php-7.4.0-nts-Win32-vc15-x64;C:\bin\laragon\bin\putty;C:\bin\laragon\bin\redis\redis-x64-3.2.100;C:\bin\laragon\bin\telnet;C:\bin\laragon\bin\yarn\bin;C:\bin\laragon\usr\bin;C:\Users\soto\AppData\Local\Yarn\config\global\node_modules\.bin;C:\Users\soto\AppData\Roaming\Composer\vendor\bin;C:\Users\soto\AppData\Local\Microsoft\WindowsApps;C:\Users\soto\AppData\Local\.meteor\;C:\Users\soto\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\soto\Homestead;C:\Users\soto\AppData\Roaming\npm;C:\Users\soto\AppData\Local\hyper\app-3.0.2\resources\bin;C:\Users\soto\AppData\Local\Yarn\bin
@@ -58,6 +58,7 @@ npm manifest:
           "netlify-identity-widget": "^1.9.1",
           "sirv-cli": "^1.0.0",
           "slug": "^4.0.2",
+          "sortablejs": "^1.13.0",
           "svelte-routing": "^1.5.0",
           "uuid": "^8.3.2"
       }
@@ -2411,6 +2412,11 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.1.20.tgz#badc263c6b1dcf14b71efaa85f6ab4c1d6cfc788"
     integrity sha512-a1cQNyczgKbLX9jwbS/+d7W8fX/RfgYR7lVWwWOGIPNgK2m0MWvrGF6/m4kk6U3QcFMnZf3RIhL0v2Jgh/0Uxw==
   
+  netlify-identity-widget@^1.9.1:
+    version "1.9.1"
+    resolved "https://registry.yarnpkg.com/netlify-identity-widget/-/netlify-identity-widget-1.9.1.tgz#9e716c4b92b9f0cc041074eb86fc962f35295b46"
+    integrity sha512-9oIWjwUSdRk3SkREcZNjZaVuDDx9T/wSIXZNQsQeY4qoXic/FiXVEGgu2RU3IuA4OI3L2652xY1o+PpS03Ugaw==
+  
   node-emoji@^1.8.1:
     version "1.10.0"
     resolved "https://registry.yarnpkg.com/node-emoji/-/node-emoji-1.10.0.tgz#8886abd25d9c7bb61802a658523d1f8d2a89b2da"
@@ -3474,6 +3480,11 @@ Lockfile:
     version "2.3.2"
     resolved "https://registry.yarnpkg.com/smartquotes/-/smartquotes-2.3.2.tgz#fb1630c49ba04e57446e1a97dc10d590072af4a6"
     integrity sha512-0R6YJ5hLpDH4mZR7N5eZ12oCMLspvGOHL9A9SEm2e3b/CQmQidekW4SWSKEmor/3x6m3NCBBEqLzikcZC9VJNQ==
+  
+  sortablejs@^1.13.0:
+    version "1.13.0"
+    resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.13.0.tgz#3ab2473f8c69ca63569e80b1cd1b5669b51269e9"
+    integrity sha512-RBJirPY0spWCrU5yCmWM1eFs/XgX2J5c6b275/YyxFRgnzPhKl/TDeU2hNR8Dt7ITq66NRPM4UlOt+e5O4CFHg==
   
   source-map-support@~0.5.19:
     version "0.5.19"
