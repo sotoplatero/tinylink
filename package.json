@@ -41,14 +41,10 @@
         "metascraper-title": "^5.18.2",
         "metascraper-url": "^5.18.2",
         "netlify-identity-widget": "^1.9.1",
-<<<<<<< HEAD
-        "node-fetch": "^2.6.1",
-=======
         "passport": "^0.4.1",
         "passport-github2": "^0.1.12",
         "passport-jwt": "^4.0.0",
         "serverless-http": "^2.7.0",
->>>>>>> 57988cd2af2800ab4a249969e229367e013706d1
         "sirv-cli": "^1.0.0",
         "slug": "^4.0.2",
         "sortablejs": "^1.13.0",

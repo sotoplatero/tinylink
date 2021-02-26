@@ -9,7 +9,7 @@ exports.handler = async function(event, context) {
     auth: process.env.GITHUB_TOKEN,
   });
 
-  try {
+  // try {
     let {data} = await octokit.repos.getContent({
       owner: 'sotoplatero',
       repo: 'db',
@@ -30,13 +30,13 @@ exports.handler = async function(event, context) {
       body: JSON.stringify(profile)
     }   
 
-  } catch (error) {
-    return {
-      statusCode: 404,
-      body: 'Not Found'
-    }     
+  // } catch (error) {
+  //   return {
+  //     statusCode: 404,
+  //     body: 'Not Found'
+  //   }     
     
-  }
+  // }
 
 
 }
