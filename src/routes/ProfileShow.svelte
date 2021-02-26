@@ -13,10 +13,10 @@
     let error = false
 
     function getComponent(link) {
-        if (isContact(link)) return Contact
-        if (isTitle(link)) return Title
-        if (isLink(link)) return Link
-        if (isImage(link)) return Image
+        if (link.type === 'form') return Contact
+        if (link.type === 'text') return Title
+        if (link.type === 'link') return Link
+        if (link.type === 'img') return Image
     }
 
     async function getProfile() {
