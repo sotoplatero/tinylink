@@ -1,5 +1,6 @@
 <script>
- 
+    import { isType } from '../_utils/types.js'   
+
     export let links 
 
     let link;
@@ -18,28 +19,24 @@
         let newlink = {
             id: links.length,
             url: link,
+            type: isType(link),
         }
+        console.log(newlink)
+        if (newlink.type === 'link') {
 
-        if (/\.(jpg|png|gif)$/.test(link)) {
-            links = [...links, {...newlink, type: 'img' }]
-            return
-        } else if ( /^https\:\/\/formspree\.io\/f\//.test(link) ) {
-            links = [...links, {...newlink, type: 'form' }]
-            return
-        } else if ( /^http(s)?\:\/\//.test(link) ) {
-            let response = await fetch(`https://api.microlink.io/?url=${link}`);
-            let {data} = await response.json()
-            links = [...links, { 
+            let response = await fetch( `https://api.microlink.io/?url=${link}` );
+            let { data } = await response.json()
+            newlink = { 
                 ...newlink,
                 title: data.author || data.title,
                 publisher: data.publisher,
                 logo: data.logo.url,
                 avatar: data.image?.url,
-                type: 'link',
-            }];
-        } else {
-            links = [...links, {...newlink, type: 'text'}]
+            };
+
         }
+
+        links = [ ...links, newlink ]
         
         link = '';
     }

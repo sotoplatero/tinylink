@@ -1,4 +1,5 @@
 <script>
+    import { navigate  } from "svelte-routing";    
 	import { onMount } from 'svelte';    
     import {fade} from 'svelte/transition';   
     import {flip} from "svelte/animate"; 
@@ -11,7 +12,9 @@
     import Contact from './_components/Contact.svelte'
     import Link from './_components/Link.svelte'
     import Title from './_components/Title.svelte'
-    import Image from './_components/Image.svelte'     
+    import Image from './_components/Image.svelte'   
+    import Download from './_components/Download.svelte'   
+
     import Nav from './_components/Nav.svelte'     
     import {auth} from './_components/AuthUser.svelte'  
  
@@ -22,8 +25,7 @@
 
     onMount(async () => {
         user = await auth()
-
-        if (!user) {
+        if ( Object.keys(user).length === 0 ) {
             navigate("/", { replace: true });
         }    
 
@@ -32,6 +34,15 @@
 
         if ( Object.keys(profile).length === 0 && profile.constructor === Object ) {
             let localProfile = JSON.parse( localStorage.getItem('profile') || '{}' )
+
+            localProfile.links = localProfile.links.map(el => { 
+                let obj = { 
+                    id:profile.links.length, 
+                    url: el, 
+                    type: isType(el)
+                }
+                return (typeof el !== 'object') ? obj : {...el, type: 'link'}
+            })  
 
             profile = { 
                 ...localProfile,
@@ -48,17 +59,6 @@
 
         }
 
-        profile.links = profile.links.map(el => { 
-            let obj = { 
-                id:profile.links.length, 
-                url: el, 
-                type: isType(el)
-            }
-            return (typeof el !== 'object') ? obj : {...el, type: 'link'}
-        })
-
-        profile = profile
-        console.log(profile)
 	});    
 
     $: profile.avatar = profile.links ? profile.links.find(el=>el.avatar)?.avatar : ''
@@ -74,6 +74,7 @@
         if (link.type === 'text') return Title
         if (link.type === 'link') return Link
         if (link.type === 'img') return Image
+        if (link.type === 'pdf') return Download
     }
 
     // SORT

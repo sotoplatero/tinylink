@@ -5,13 +5,17 @@ module.exports = {
             return 'form'
         }
 
-        if ( !/^http(s)?\:\/\//.test(link) && typeof link === 'string' ) {
+        if ( /\.(jpg|png|gif)$/.test(link) ) {
+            return 'img' 
+        }  
+        
+        if ( /\.(pdf)$/.test(link)  ) return 'pdf'
+        
+        if ( /^http(s)?\:\/\//.test(link) && typeof link === 'string' ) {
             return 'link' 
         } 
-        
-        if ( /\.(jpg|png|gif)$/.test(link) ) return 'img'   
-        if ( typeof link === 'object' ) return 'obj'
-        if ( /\.(pdf)$/.test(link)  ) return 'pdf'
+
+        return 'text' 
     },
 
 }
