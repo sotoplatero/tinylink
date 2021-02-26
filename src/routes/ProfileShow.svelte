@@ -38,7 +38,7 @@
     {/await}
     </svelte:head>
 
-<div class="w-full px-2 sm:px-0 sm:w-96 min-h-screen mx-auto">
+<div class="w-full px-2 sm:px-0 sm:w-2/5 lg:w-1/4 min-h-screen mx-auto">
     {#await profilePromise }
 
         <div class="h-screen flex items-center justify-center">
@@ -54,7 +54,7 @@
                 <header class="text-center mb-4">
                     <Avatar avatar={profile.avatar} />
                     <h1 class="text-2xl font-semibold">
-                        {profile.name}
+                        {profile.slug}
                     </h1>
 
                 </header>

@@ -106,7 +106,7 @@
                         name="name"
                         autocomplete="off"
                         placeholder="Profile Name"
-                        bind:value={profile.slug}
+                        bind:value={profile.name}
                         class="w-full p-3 border rounded-lg font-semibold focus:ring-blue-500 focus:ring-2 outline-none border-gray-300" 
                     />    
                 </div>

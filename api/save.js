@@ -11,7 +11,7 @@ exports.handler = async (event) => {
   
   profile = { 
     id: profile.id || uuidv4(), 
-    slug: profile.slug || slug(profile.name), 
+    slug: slug(profile.name), 
     ...profile 
   };
 
