@@ -3,7 +3,7 @@ const { Octokit } = require("@octokit/rest");
 /* export our lambda function as named "handler" export */
 exports.handler = async function(event, context) {
 
-  let {slug} = event.queryStringParameters;
+  let {email} = event.queryStringParameters;
 
   const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN,
@@ -19,9 +19,8 @@ exports.handler = async function(event, context) {
     let content = Buffer.from( data.content, 'base64' ).toString('utf8');
     let profiles = JSON.parse(content);
   
-    const profile = profiles.find(el=>el.slug===slug)
-    delete profile.email
-    
+    const {profile} = profiles.find(el=>el.email===email)
+
     return {
       headers: { 
           'Content-Type':'application/json' , 

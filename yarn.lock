@@ -4057,6 +4057,11 @@ supports-color@^7.0.0, supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
+svelte-dnd-action@^0.8.9:
+  version "0.8.9"
+  resolved "https://registry.yarnpkg.com/svelte-dnd-action/-/svelte-dnd-action-0.8.9.tgz#90fa211057a5d9e832d5521511f9c1b87242d2ae"
+  integrity sha512-4WaLRvERr2JoX6Lh9GnlEZRzFF5eY3h2q0n5+lS4/+nqqQjTIpCwTrncMf9tJNa+M4AGy43I5aq5F+Ohl/nxLg==
+
 svelte-routing@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/svelte-routing/-/svelte-routing-1.5.0.tgz#a518cf67d8c09dd30a04cf6f9473ce5612fd4c8b"

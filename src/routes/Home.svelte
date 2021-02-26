@@ -1,3 +1,19 @@
+<script >
+	import { onMount } from 'svelte';   
+    import { navigate  } from "svelte-routing";
+    import {auth} from './_components/Auth.svelte'      
+
+    export let location;
+
+    onMount(async()=>{
+        let user = await auth()
+        if (user) {
+            navigate("/profile", { replace: true });
+        }
+
+    }) 
+      
+</script>
 <div class="h-screen flex justify-center items-center">
     <div class="w-1/2 mx-auto text-center">
         <h1 class="text-6xl leading-snug mb-8">The <span class="font-bold">easier way</span> to create your link profile</h1>
