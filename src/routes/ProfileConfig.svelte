@@ -13,7 +13,7 @@
     import Title from './_components/Title.svelte'
     import Image from './_components/Image.svelte'     
     import Nav from './_components/Nav.svelte'     
-    import {auth} from './_components/AuthUser.svelte'  
+    import {auth} from './_components/AuthUser.svelteelte'  
  
     import { isContact, isTitle, isLink } from '../utils/types.js'   
 
