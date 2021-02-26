@@ -1,7 +1,7 @@
 <script >
 	import { onMount } from 'svelte';   
     import { navigate  } from "svelte-routing";
-    import {auth} from './_components/Auth.svelte'      
+    import {auth} from './_components/AuthUser.svelte'      
 
     export let location;
 
