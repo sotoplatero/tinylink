@@ -12,7 +12,7 @@
 >
   <div class="font-semibold text-lg mb-4">Contact</div>
   <form
-    action="{link}"
+    action="{link.url}"
     method="POST"
     class="w-full space-y-2"
   >

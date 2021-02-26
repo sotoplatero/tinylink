@@ -15,7 +15,7 @@
     import Nav from './_components/Nav.svelte'     
     import {auth} from './_components/AuthUser.svelte'  
  
-    import { isContact, isTitle, isLink } from '../utils/types.js'   
+    import { isType } from './_utils/types.js'   
 
     let profile = { name:'', links:[]} 
     let user 
@@ -32,14 +32,13 @@
 
         if ( Object.keys(profile).length === 0 && profile.constructor === Object ) {
             let localProfile = JSON.parse( localStorage.getItem('profile') || '{}' )
-            localProfile.links = localProfile.links.map((el,idx)=> ({ ...el, id: idx }))
 
             profile = { 
+                ...localProfile,
                 email: user.email,
-                name: user.nameName,
+                name: user.userName,
                 slug: user.login,
                 avatar: user.avatar,
-                ...localProfile,
             }
 
             let response = await fetch('/api/save',{
@@ -48,22 +47,36 @@
             });            
 
         }
+
+        profile.links = profile.links.map(el => { 
+            let obj = { 
+                id:profile.links.length, 
+                url: el, 
+                type: isType(el)
+            }
+            return (typeof el !== 'object') ? obj : {...el, type: 'link'}
+        })
+
+        profile = profile
+        console.log(profile)
 	});    
 
     $: profile.avatar = profile.links ? profile.links.find(el=>el.avatar)?.avatar : ''
-        
+    
+    // REMOVE ITEMS
     function remove(index) {
         profile.links.splice(index,1)
         profile=profile
     }
 
     function getComponent(link) {
-        if (isContact(link)) return Contact
-        if (isTitle(link)) return Title
-        if (isLink(link)) return Link
-        if (isImage(link)) return Image
+        if (link.type === 'form') return Contact
+        if (link.type === 'text') return Title
+        if (link.type === 'link') return Link
+        if (link.type === 'img') return Image
     }
 
+    // SORT
     const flipDurationMs = 300;    
     function handleSort(e) {
         profile.links = e.detail.items;
@@ -77,30 +90,38 @@
 {#if user}
     <Nav {user}/>
 {/if}
-<div class="w-full px-2 sm:px-0 sm:w-2/5 min-h-screen mx-auto">
+<div class="w-full px-2 sm:px-0 sm:w-2/5 lg:w-1/4 min-h-screen mx-auto">
 
-    <!-- <header class="mb-4 mt-10 text-center">
-        <svg class="h-12 w-12 text-pink-700 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-          </svg>        
-        <h1 class="text-3xl font-bold">Tinylink</h1>
-        <p class="text-lg ">Create your link profile</p>
-    </header> -->
+
 
     <main class="">
             <div class="space-y-4">
-                <div class="text-center">
+                <div class="text-center transition">
                     <Avatar avatar={profile.avatar} />
                 </div>
+
                 <div>
-                    <!-- <label for="`name`">Name</label> -->
+                    <label for="name">Username</label>
                     <input
                         name="name"
+                        autocomplete="off"
                         placeholder="Profile Name"
-                        bind:value={profile.name}
+                        bind:value={profile.slug}
                         class="w-full p-3 border rounded-lg font-semibold focus:ring-blue-500 focus:ring-2 outline-none border-gray-300" 
                     />    
                 </div>
+
+                <!-- <div>
+                    <label for="name">Username</label>
+                    <input
+                        name="name"
+                        autocomplete="off"
+                        placeholder="Profile Name"
+                        bind:value={profile.slug}
+                        class="w-full p-3 border rounded-lg font-semibold focus:ring-blue-500 focus:ring-2 outline-none border-gray-300" 
+                    />  
+                    <div class="text-sm text-gray-400 font-semibold">https://tinylink.dsoto.dev/{profile.slug}</div>  
+                </div> -->
 
                 <div>
                 
@@ -132,7 +153,7 @@
                                         hover:bg-opacity-25
                                         hover:opacity-100"
                                 >
-                                    <div class="px-4 bg-gray-100 flex items-center">
+                                    <div class="px-4 bg-gray-100 flex items-center rounded-lg">
 
                                         <button 
                                             title="Delete Link"
@@ -141,7 +162,7 @@
                                                 text-gray-400 
                                                 hover:text-red-500 
                                                 transition transform 
-
+                                                
                                                 "
                                         >
                                         <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -164,7 +185,7 @@
 
                 <div class="space-y-2">
                     <BtnSave bind:profile/>
-                    {#if profile.slug}
+                    {#if profile.id}
                         <a  href="/{profile.slug}" 
                             target="_blank"
                             class="flex 
@@ -191,7 +212,6 @@
         <p class="text-sm text-gray-600">
             Made with &#9995; and &#128147; at &#127968; by <a href="https://twitter.com/sotoplatero" class="text-blue-500">@sotoplatero</a><br>
         </p>
-        <p class="text-sm text-gray-500 mt-2">This is a test</p>
     </footer>
 </div>
 

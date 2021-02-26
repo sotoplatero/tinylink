@@ -11,29 +11,29 @@ exports.handler = async (event) => {
   
   profile = { 
     id: profile.id || uuidv4(), 
-    slug: slug(profile.name), 
+    slug: profile.slug || slug(profile.name), 
     ...profile 
   };
 
   let options = {
     owner: 'sotoplatero',
     repo: 'db',
-    path: 'tinylink.json',
+    path: 'profiles.json',
   };
 
   const {data} = await octokit.repos.getContent(options)
   
   let content = Buffer.from( data.content, 'base64' ).toString('utf8');
-  let tinylink = JSON.parse(content);
-  let existProfileIndex = tinylink.findIndex(el => el.id === profile.id )
+  let profiles = JSON.parse(content);
+  let existProfileIndex = profiles.findIndex(el => el.email === profile.email )
   
   if ( existProfileIndex !== -1 ){
-	  tinylink.splice( existProfileIndex, 1, profile )
+	  profiles.splice( existProfileIndex, 1, profile )
   } else {
-	  tinylink = [...tinylink, profile ];
+	  profiles = [...profiles, profile ];
 	}
 
-  var fileContent = Buffer.from( JSON.stringify(tinylink), 'utf8' ).toString('base64') 
+  var fileContent = Buffer.from( JSON.stringify(profiles), 'utf8' ).toString('base64') 
   await octokit.repos.createOrUpdateFileContents({ 
     ...options, 
     message: '+',
