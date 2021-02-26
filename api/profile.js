@@ -3,13 +3,13 @@ const { Octokit } = require("@octokit/rest");
 /* export our lambda function as named "handler" export */
 exports.handler = async function(event, context) {
 
-  let {slug} = event.queryStringParameters;
+  let {email} = event.queryStringParameters;
 
   const octokit = new Octokit({
     auth: process.env.GITHUB_TOKEN,
   });
 
-  try {
+  // try {
     let {data} = await octokit.repos.getContent({
       owner: 'sotoplatero',
       repo: 'db',
@@ -19,24 +19,24 @@ exports.handler = async function(event, context) {
     let content = Buffer.from( data.content, 'base64' ).toString('utf8');
     let profiles = JSON.parse(content);
   
-    const profile = profiles.find(el=>el.slug===slug)
-    delete profile.email
-    
+    const profileUser = profiles.find(el=>el.email===email)
+
+
     return {
       headers: { 
           'Content-Type':'application/json' , 
       },    
       statusCode: 200,
-      body: JSON.stringify(profile)
+      body: JSON.stringify(profileUser)
     }   
 
-  } catch (error) {
-    return {
-      statusCode: 404,
-      body: 'Not Found'
-    }     
+  // } catch (error) {
+  //   return {
+  //     statusCode: 404,
+  //     body: 'Not Found'
+  //   }     
     
-  }
+  // }
 
 
 }

@@ -1,16 +1,23 @@
 <!-- App.svelte -->
-<script>
-  import { Router, Route } from "svelte-routing";
+<script >
+	import { onMount } from 'svelte';     
+  import { Router, Route, navigate  } from "svelte-routing";
+  import ProfileConfig from "./routes/ProfileConfig.svelte";
+  import ProfileShow from "./routes/ProfileShow.svelte";
   import Home from "./routes/Home.svelte";
-  import Profile from "./routes/Profile.svelte";
-  
+
   export let url = "";
+  let user
+
 
 </script>
 
-<Router url="{url}">
-  <div>
-    <Route path=":slug" component="{Profile}" />
-    <Route path="/"><Home /></Route>
+<div>
+
+    <Router url="{url}">
+      <Route path="/" component="{Home}"  />  
+      <Route path="/profile" component="{ProfileConfig}"  />
+      <Route path="/:slug" component="{ProfileShow}" />
+    </Router>
+
   </div>
-</Router>
