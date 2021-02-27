@@ -13,10 +13,10 @@
     let error = false
 
     function getComponent(link) {
-        if (isContact(link)) return Contact
-        if (isTitle(link)) return Title
-        if (isLink(link)) return Link
-        if (isImage(link)) return Image
+        if (link.type === 'form') return Contact
+        if (link.type === 'text') return Title
+        if (link.type === 'link') return Link
+        if (link.type === 'img') return Image
     }
 
     async function getProfile() {
@@ -38,7 +38,7 @@
     {/await}
     </svelte:head>
 
-<div class="w-full px-2 sm:px-0 sm:w-96 min-h-screen mx-auto">
+<div class="w-full px-2 sm:px-0 sm:w-1/5 lg:w-2/5 min-h-screen mx-auto">
     {#await profilePromise }
 
         <div class="h-screen flex items-center justify-center">
@@ -54,7 +54,7 @@
                 <header class="text-center mb-4">
                     <Avatar avatar={profile.avatar} />
                     <h1 class="text-2xl font-semibold">
-                        {profile.name}
+                        {profile.slug}
                     </h1>
 
                 </header>
