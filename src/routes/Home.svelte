@@ -7,7 +7,7 @@
 
     onMount(async()=>{
         let user = await auth()
-        if (user) {
+        if (typeof user === 'object') {
             navigate("/profile", { replace: true });
         }
 
