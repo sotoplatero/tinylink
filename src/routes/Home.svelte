@@ -1,10 +1,12 @@
 <script >
 	import { onMount } from 'svelte';   
     import { navigate  } from "svelte-routing";
-    import { auth } from './_components/AuthUser.svelte'      
+    // import { auth } from './_components/AuthUser.svelte'      
 
+    export let user
     onMount(async()=>{
-        let user = await auth()
+        // console.log(user)
+        // let user = await auth()
 
         if ( Object.keys(user).length !== 0 ) {
             navigate("/profile", { replace: true });

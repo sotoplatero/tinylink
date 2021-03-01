@@ -34,6 +34,7 @@
         "netlify-identity-widget": "^1.9.1",
         "passport": "^0.4.1",
         "passport-github2": "^0.1.12",
+        "passport-google-oauth20": "^2.0.0",
         "passport-jwt": "^4.0.0",
         "serverless-http": "^2.7.0",
         "sirv-cli": "^1.0.0",

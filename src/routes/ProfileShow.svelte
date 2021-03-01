@@ -6,7 +6,6 @@
     import Title from './_components/Title.svelte'
     import Image from './_components/Image.svelte'
     import { isContact, isTitle, isLink } from '../utils/types.js'
-import { profile } from 'console'
 
     export let slug
 
