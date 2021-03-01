@@ -35,7 +35,7 @@
 
 
 <svelte:head>
-{#await profilePromise }
+{#await profilePromise then profile }
     <title>{profile.name}</title>
     <meta property="og:image" content="https://usecard.dsoto.dev/card?url=https://tinylink.dsoto.dev/{profile.slug}&theme=box">        
     <meta property="og:logo" content="{profile.avatar}">            
