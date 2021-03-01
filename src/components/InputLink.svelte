@@ -1,5 +1,5 @@
 <script>
-    import { isType } from '../_utils/types.js'   
+    import { isType } from '../utils/types.js'   
 
     export let links 
 

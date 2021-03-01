@@ -1,5 +1,5 @@
 <script>
-  import {clickOutside} from '../_utils/clickoutside.js'; 
+  import {clickOutside} from '../utils/clickoutside.js'; 
 
   export let user
   

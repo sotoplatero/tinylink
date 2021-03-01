@@ -1,13 +1,14 @@
 
 <script>
-    import Avatar from './_components/Avatar.svelte'
-    import Contact from './_components/Contact.svelte'
-    import Link from './_components/Link.svelte'
-    import Title from './_components/Title.svelte'
-    import Image from './_components/Image.svelte'
+    import Avatar from '../components/Avatar.svelte'
+    import Contact from '../components/Contact.svelte'
+    import Link from '../components/Link.svelte'
+    import Title from '../components/Title.svelte'
+    import Image from '../components/Image.svelte'
     import { isContact, isTitle, isLink } from '../utils/types.js'
 
     export let slug
+    export let user
 
     let profilePromise = getProfile();
     let error = false

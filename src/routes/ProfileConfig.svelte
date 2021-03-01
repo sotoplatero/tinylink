@@ -4,19 +4,20 @@
     import {flip} from "svelte/animate"; 
     import {dndzone} from "svelte-dnd-action";    
 
-    import Avatar from './_components/Avatar.svelte'
-    import InputLink from './_components/InputLink.svelte'
-    import Item from './_components/Item.svelte'
-    import BtnSave from './_components/BtnSave.svelte'
+    import Avatar from '../components/Avatar.svelte'
+    import InputLink from '../components/InputLink.svelte'
+    import Item from '../components/Item.svelte'
+    import BtnSave from '../components/BtnSave.svelte'
     
-    import Nav from './_components/Nav.svelte'     
-    import {auth} from './_components/AuthUser.svelte'  
+    import Nav from '../components/Nav.svelte'     
+    import {auth} from '../components/AuthUser.svelte'  
  
+    export let user 
+
     let profile = { name:'', links:[] } 
-    let user 
 
     onMount(async () => {
-        user = await auth()
+        // user = await auth()
         if ( Object.keys(user).length === 0 ) {
             navigate("/", { replace: true });
         }    

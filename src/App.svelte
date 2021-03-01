@@ -17,13 +17,12 @@
 </script>
 
 <div>
-  <Router url="{url}">
-    {#if user }
-    <Route path="/" component="{Home}" {user} />  
-    <Route path="/profile" component="{ProfileConfig}" {user} />
-    <Route path="/:slug" component="{ProfileShow}" />
-      
-      {/if}
+  {#if user }
+    <Router url="{url}">
+      <Route path="/" component="{Home}" {user} />  
+      <Route path="/profile" component="{ProfileConfig}" {user} />
+      <Route path="/:slug" component="{ProfileShow}" />
     </Router>
+  {/if}
 
   </div>
