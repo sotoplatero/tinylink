@@ -1,30 +1,23 @@
 <script>
-    import { navigate  } from "svelte-routing";    
 	import { onMount } from 'svelte';    
-    import {fade} from 'svelte/transition';   
+    import { navigate  } from "svelte-routing";    
     import {flip} from "svelte/animate"; 
     import {dndzone} from "svelte-dnd-action";    
 
-    import InputLink from './_components/InputLink.svelte'
-    import BtnSave from './_components/BtnSave.svelte'
+    import Avatar from '../components/Avatar.svelte'
+    import InputLink from '../components/InputLink.svelte'
+    import Item from '../components/Item.svelte'
+    import BtnSave from '../components/BtnSave.svelte'
     
-    import Avatar from './_components/Avatar.svelte'
-    import Contact from './_components/Contact.svelte'
-    import Link from './_components/Link.svelte'
-    import Title from './_components/Title.svelte'
-    import Image from './_components/Image.svelte'   
-    import Download from './_components/Download.svelte'   
-
-    import Nav from './_components/Nav.svelte'     
-    import {auth} from './_components/AuthUser.svelte'  
+    import Nav from '../components/Nav.svelte'     
+    import {auth} from '../components/AuthUser.svelte'  
  
-    import { isType } from './_utils/types.js'   
+    export let user 
 
-    let profile = { name:'', links:[]} 
-    let user 
+    let profile = { name:'', links:[] } 
 
     onMount(async () => {
-        user = await auth()
+        // user = await auth()
         if ( Object.keys(user).length === 0 ) {
             navigate("/", { replace: true });
         }    
@@ -69,14 +62,6 @@
         profile=profile
     }
 
-    function getComponent(link) {
-        if (link.type === 'form') return Contact
-        if (link.type === 'text') return Title
-        if (link.type === 'link') return Link
-        if (link.type === 'img') return Image
-        if (link.type === 'pdf') return Download
-    }
-
     // SORT
     const flipDurationMs = 300;    
     function handleSort(e) {
@@ -91,9 +76,7 @@
 {#if user}
     <Nav {user}/>
 {/if}
-<div class="w-full px-2 sm:px-0 sm:w-2/5 lg:w-1/4 min-h-screen mx-auto">
-
-
+<div class="w-full px-2 sm:px-0 sm:w-3/5 lg:w-2/5 min-h-screen mx-auto">
 
     <main class="">
             <div class="space-y-4">
@@ -112,18 +95,6 @@
                     />    
                 </div>
 
-                <!-- <div>
-                    <label for="name">Username</label>
-                    <input
-                        name="name"
-                        autocomplete="off"
-                        placeholder="Profile Name"
-                        bind:value={profile.slug}
-                        class="w-full p-3 border rounded-lg font-semibold focus:ring-blue-500 focus:ring-2 outline-none border-gray-300" 
-                    />  
-                    <div class="text-sm text-gray-400 font-semibold">https://tinylink.dsoto.dev/{profile.slug}</div>  
-                </div> -->
-
                 <div>
                 
                     <div 
@@ -139,7 +110,7 @@
                                 animate:flip={{duration:flipDurationMs}}
                             >
 
-                                <svelte:component this={getComponent(link)} {link} /> 
+                                <Item link={link} /> 
 
                                 <div 
                                     class="

@@ -1,19 +1,21 @@
 module.exports = {
-    isContact: (link) => {
-        return /^https\:\/\/(formspree|formkeep|getform)\..{2,3}\/f\//.test(link) || 
-                /^https\:\/\/submit-form\.com\//.test(link) 
-    },
-    isTitle: (link) => {
-        return ( !/^http(s)?\:\/\//.test(link) && typeof link === 'string' )    
-    },
-    isImage: (link) => {
-        return ( /\.(jpg|png|gif)$/.test(link)  )    
-    },
-    isLink: (link) => {
-        return ( typeof link === 'object' )    
-    },
-    isPDF: (link) => {
-        return ( /\.(pdf)$/.test(link)  )    
+    isType: (link) => {
+        
+        if (/^https\:\/\/(formspree|formkeep|getform)\..{2,3}\/f\//.test(link) || /^https\:\/\/submit-form\.com\//.test(link)) {
+            return 'form'
+        }
+
+        if ( /\.(jpg|png|gif)$/.test(link) ) {
+            return 'img' 
+        }  
+        
+        if ( /\.(pdf)$/.test(link)  ) return 'pdf'
+        
+        if ( /^http(s)?\:\/\//.test(link) && typeof link === 'string' ) {
+            return 'link' 
+        } 
+
+        return 'text' 
     },
 
 }

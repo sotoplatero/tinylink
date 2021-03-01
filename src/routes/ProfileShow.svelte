@@ -1,13 +1,14 @@
 
 <script>
-    import Avatar from './_components/Avatar.svelte'
-    import Contact from './_components/Contact.svelte'
-    import Link from './_components/Link.svelte'
-    import Title from './_components/Title.svelte'
-    import Image from './_components/Image.svelte'
+    import Avatar from '../components/Avatar.svelte'
+    import Contact from '../components/Contact.svelte'
+    import Link from '../components/Link.svelte'
+    import Title from '../components/Title.svelte'
+    import Image from '../components/Image.svelte'
     import { isContact, isTitle, isLink } from '../utils/types.js'
 
     export let slug
+    export let user
 
     let profilePromise = getProfile();
     let error = false
@@ -32,22 +33,26 @@
 
 </script>
 
-    <svelte:head>
-    {#await profilePromise then profile}
-        <title>{profile.name}</title>
-    {/await}
-    </svelte:head>
 
-<div class="w-full px-2 sm:px-0 sm:w-2/5 lg:w-1/4 min-h-screen mx-auto">
-    {#await profilePromise }
+<svelte:head>
+{#await profilePromise }
+    <title>{profile.name}</title>
+    <meta property="og:image" content="https://usecard.dsoto.dev/card?url=https://tinylink.dsoto.dev/{profile.slug}&theme=box">        
+    <meta property="og:logo" content="{profile.avatar}">            
+{/await}
+</svelte:head>
 
-        <div class="h-screen flex items-center justify-center">
-              <svg class="animate-bounce w-10 h-10 text-amber-900 text-purple-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>              
-        </div>
+{#await profilePromise }
 
-    {:then profile}
+    <div class="h-screen flex items-center justify-center">
+        <svg class="animate-bounce w-10 h-10 text-amber-900 text-purple-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>              
+    </div>
+
+{:then profile}
+
+    <div class="w-full px-2 sm:px-0 sm:w-1/5 lg:w-2/5 min-h-screen mx-auto">
 
         {#if !error}
             <div class="my-10 sm:my-20 ">
@@ -93,6 +98,6 @@
 
 
 
-    {/await}
-
-</div>
+        
+    </div>
+{/await}
