@@ -1,7 +1,6 @@
 import { Router } from "express";
 import passport from "passport";
 import { Strategy } from "passport-google-oauth20";
-import get from "lodash/fp/get";
 
 const router = Router();
 
@@ -26,7 +25,7 @@ router.use((req, _res, next) => {
           console.info("load user profile", profile);
           const user = {
             id: profile.id,
-            image: get("photos[0].value")(profile),
+            image: profile.photos[0].value,
             userName: profile.displayName
           };
 
