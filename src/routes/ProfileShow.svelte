@@ -1,26 +1,13 @@
 
 <script>
     import Avatar from '../components/Avatar.svelte'
-    import Contact from '../components/Contact.svelte'
-    import Link from '../components/Link.svelte'
-    import Title from '../components/Title.svelte'
-    import Image from '../components/Image.svelte'
-    import { isContact, isTitle, isLink } from '../utils/types.js'
+    import Item from '../components/Item.svelte'    
 
     export let slug
-    export let user
 
-    let profilePromise = getProfile();
     let error = false
-
-    function getComponent(link) {
-        if (link.type === 'form') return Contact
-        if (link.type === 'text') return Title
-        if (link.type === 'link') return Link
-        if (link.type === 'img') return Image
-    }
-
-    async function getProfile() {
+    
+    let profilePromise = (async () => {
 
         let response = await fetch(`/api/show?slug=${slug}`)
 
@@ -29,7 +16,7 @@
         } else {
             error = true
         }
-    }
+    })()
 
 </script>
 
@@ -52,7 +39,7 @@
 
 {:then profile}
 
-    <div class="w-full px-2 sm:px-0 sm:w-1/5 lg:w-2/5 min-h-screen mx-auto">
+    <div class="w-full px-2 sm:px-0 sm:w-3/4 lg:w-2/4 xl:w-1/4 min-h-screen mx-auto">
 
         {#if !error}
             <div class="my-10 sm:my-20 ">
@@ -67,10 +54,7 @@
                     {#each profile.links as link}
                         <div class="flex items-center ">
 
-                            <svelte:component 
-                                this={getComponent(link)} 
-                                {link}
-                            />
+                            <Item link={link} /> 
 
                         </div>
                     {/each}

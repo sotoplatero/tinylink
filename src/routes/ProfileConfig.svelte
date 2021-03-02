@@ -10,14 +10,13 @@
     import BtnSave from '../components/BtnSave.svelte'
     
     import Nav from '../components/Nav.svelte'     
-    import {auth} from '../components/AuthUser.svelte'  
  
     export let user 
 
     let profile = { name:'', links:[] } 
 
     onMount(async () => {
-        // user = await auth()
+
         if ( Object.keys(user).length === 0 ) {
             navigate("/", { replace: true });
         }    
@@ -76,7 +75,7 @@
 {#if user}
     <Nav {user}/>
 {/if}
-<div class="w-full px-2 sm:px-0 sm:w-3/5 lg:w-2/5 min-h-screen mx-auto">
+<div class="w-full px-2 sm:px-0 sm:w-3/4 lg:w-2/4 xl:w-1/4 min-h-screen mx-auto">
 
     <main class="">
             <div class="space-y-4">

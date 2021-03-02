@@ -1,7 +1,7 @@
 <!-- App.svelte -->
 <script >
 	import { onMount } from 'svelte';     
-  import { Router, Route, navigate  } from "svelte-routing";
+  import { Router, Route  } from "svelte-routing";
   import ProfileConfig from "./routes/ProfileConfig.svelte";
   import ProfileShow from "./routes/ProfileShow.svelte";
   import Home from "./routes/Home.svelte";
