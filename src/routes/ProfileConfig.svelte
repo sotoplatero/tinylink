@@ -76,7 +76,7 @@
 {#if user}
     <Nav {user}/>
 {/if}
-<div class="w-full px-2 sm:px-0 sm:w-3/4 lg:w-2/4 xl:w-1/4 min-h-screen mx-auto">
+<div class="w-full px-2 sm:px-0 sm:w-3/4 lg:w-2/4 xl:w-2/5 min-h-screen mx-auto">
 
     <main class="">
             <div class="space-y-4">
