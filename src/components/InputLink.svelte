@@ -25,15 +25,29 @@
 
         if (newlink.type === 'link') {
 
-            let response = await fetch( `https://api.microlink.io/?url=${link}` );
-            let { data } = await response.json()
-            newlink = { 
-                ...newlink,
-                title: data.author || data.title,
-                publisher: data.publisher,
-                logo: data.logo.url,
-                avatar: data.image?.url,
-            };
+            let re = /(facebook\.com)|(instagram\.com)|(linkedin\.com)/
+            if (re.test(link)) {
+                
+                newlink = { 
+                    ...newlink,
+                    title: link.replace(/\/$/,'').split('/').reverse()[0],
+                    publisher: link.match(re)[0].split('.')[0],
+                    logo: 'https://unavatar.now.sh/' + link.match(re)[0],
+                };
+
+            } else {
+                
+                let response = await fetch( `https://api.microlink.io/?url=${link}` );
+                let { data } = await response.json()
+                newlink = { 
+                    ...newlink,
+                    title: data.author || data.title,
+                    publisher: data.publisher,
+                    logo: data.logo.url,
+                    avatar: data.image?.url,
+                };
+
+            }     
 
         }
 

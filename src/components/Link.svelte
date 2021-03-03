@@ -24,7 +24,7 @@ src="{link.logo}"
     alt="{link.title}"
 /> 
 <div class="mr-auto leading-5">
-    <div class="font-semibold">{link.publisher}</div> 
+    <div class="font-semibold capitalize">{link.publisher}</div> 
     <div class="text-gray-500">{link.title}</div> 
 </div>
 <div>
