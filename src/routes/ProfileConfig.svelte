@@ -1,8 +1,8 @@
 <script>
 	import { onMount } from 'svelte';    
     import { navigate  } from "svelte-routing";    
-    import {flip} from "svelte/animate"; 
-    import {dndzone} from "svelte-dnd-action";    
+    import { flip } from "svelte/animate"; 
+    import { dndzone } from "svelte-dnd-action";    
 
     import Avatar from '../components/Avatar.svelte'
     import InputLink from '../components/InputLink.svelte'
@@ -11,7 +11,7 @@
     
     import Nav from '../components/Nav.svelte'     
  
-    export let user 
+    export let user
 
     let profile = { name:'', links:[] } 
 
@@ -20,6 +20,7 @@
         if ( Object.keys(user).length === 0 ) {
             navigate("/", { replace: true });
         }    
+        console.log(Object.keys(user).length)
 
         let responseProfile = await fetch(`/api/profile/?email=${user.email}`)
         profile = await responseProfile.json()

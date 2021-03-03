@@ -8,21 +8,25 @@
   import { auth } from './components/AuthUser.svelte'        
 
   export let url = "";
-  let user
+  let userPromise = auth()
 
   onMount(async()=>{
-    user = await auth()
+    // user = await auth()
   }) 
 
 </script>
 
 <div>
-  {#if user }
-    <Router url="{url}">
+  <Router url="{url}">
+    {#await userPromise}
+      loading
+    {:then user} 
       <Route path="/" component="{Home}" {user} />  
       <Route path="/profile" component="{ProfileConfig}" {user} />
       <Route path="/:slug" component="{ProfileShow}" />
-    </Router>
-  {/if}
+    {:catch error}
+      <Route path="/" component="{Home}" />  
+    {/await}
+  </Router>
 
   </div>
