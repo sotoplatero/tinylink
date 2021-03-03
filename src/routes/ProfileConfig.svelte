@@ -73,8 +73,8 @@
 <svelte:head>
 	<title>Tinylink</title>
 </svelte:head>
-{#if user}
-    <Nav {user}/>
+{#if user && profile}
+    <Nav {user} {profile}/>
 {/if}
 <div class="w-full px-2 sm:px-0 sm:w-3/4 lg:w-2/4 xl:w-2/5 min-h-screen mx-auto">
 
@@ -157,30 +157,12 @@
 
                 <div class="space-y-2">
                     <BtnSave bind:profile/>
-                    {#if profile.id}
-                        <a  href="/{profile.slug}" 
-                            target="_blank"
-                            class="flex 
-                                items-center 
-                                justify-center 
-                                block w-full 
-                                text-center p-4 
-                                text-blue-500 
-                                font-bold 
-                                hover:text-blue-600 
-                                transition rounded-lg">
-                            <span>Visit</span>
-                            <svg class="h-4 w-4 inline ml-2 opacity-75" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                            </svg>                    
-                        </a>
-                    {/if}
                 </div>  
             </div>
 
     </main>
 
-    <footer class="text-center my-8">
+    <footer class="text-center mt-16 mb-8">
         <p class="text-sm text-gray-600">
             Made with &#9995; and &#128147; at &#127968; by <a href="https://twitter.com/sotoplatero" class="text-blue-500">@sotoplatero</a><br>
         </p>
