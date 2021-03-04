@@ -5,7 +5,7 @@
         </svg>
         <div class="text-xl font-semibold">
             This profile does not exist. <br>
-            <a class="text-blue-600 hover:underline" href="/profile">Do you want to create your profile?</a> 
+            <a class="text-blue-600 hover:underline" href="/profile">do you want to create it?</a> 
         </div>
     </div>
 </div>       
