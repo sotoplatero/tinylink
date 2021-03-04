@@ -44,7 +44,7 @@
                     title: data.author || data.title,
                     publisher: data.publisher,
                     logo: data.logo.url,
-                    avatar: data.image?.url,
+                    avatar: data.image.url || '',
                 };
 
             }     

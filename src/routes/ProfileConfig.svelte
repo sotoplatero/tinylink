@@ -54,7 +54,7 @@
 
 	});    
 
-    $: profile.avatar = profile.links ? profile.links.find(el=>el.avatar)?.avatar : ''
+    $: profile.avatar = profile.links ? profile.links.find(el=>el.avatar).avatar : ''
     
     // REMOVE ITEMS
     function remove(index) {
@@ -80,9 +80,11 @@
 
     <main class="">
             <div class="space-y-4">
-                <div class="text-center transition">
-                    <Avatar avatar={profile.avatar} />
-                </div>
+                {#if profile.avatar}
+                    <div class="text-center transition">
+                        <Avatar avatar={profile.avatar} />
+                    </div>
+                {/if}
 
                 <div>
                     <label for="name">Username</label>
