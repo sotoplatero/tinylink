@@ -43,7 +43,7 @@
                     ...newlink,
                     title: data.author || data.title,
                     publisher: data.publisher,
-                    logo: data.logo.url,
+                    logo: !!data.logo ? data.logo.url : `https://avatar.oxro.io/avatar.svg?name=${encodeURIComponent(data.publisher || data.title)}&background=6ab04c&color=000`,
                     avatar: data.image.url || '',
                 };
 
