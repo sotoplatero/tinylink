@@ -54,7 +54,7 @@
 
 	});    
 
-    $: profile.avatar = profile.links ? profile.links.find(el=>el.avatar).avatar : ''
+    $: profile.avatar = profile.links.some(el=>el.avatar) ? profile.links.find(el=>el.avatar).avatar || '' : ''
     
     // REMOVE ITEMS
     function remove(index) {
