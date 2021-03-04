@@ -58,7 +58,7 @@
 </script>
 
 <div >
-    <label for="link">Add yours Links</label>
+    <label for="link">Add Link</label>
     <div class="relative">
         <input 
             bind:value={link}
