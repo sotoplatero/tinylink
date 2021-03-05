@@ -1,12 +1,38 @@
-const got = require('got')
-/* export our lambda function as named "handler" export */
+const chromium = require('chrome-aws-lambda');
+const got = require('got');
 const cheerio = require('cheerio');
+const { parse } = require('tldts')
+const autoDomains = require('./_util/auto-domains')
+
+const getHtmlPptr = async url => {
+
+    const browser = await chromium.puppeteer.launch({
+        ignoreDefaultArgs: ['--disable-extensions'],
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: process.env.PATH_CHROME || await chromium.executablePath,
+        headless: true,
+    });
+    
+    const page = await browser.newPage(); 
+    await page.goto(url);   
+    let html = await page.content();
+    
+    return html;
+}
+
+const getHtml = async url => {
+    const res = await got(url)
+    return await res.body;
+}
+
 exports.handler = async function(event, context) { 
     
     let {url} = event.queryStringParameters;
+    const { domain, domainWithoutSuffix } = parse(url)
     
-    const response = await got(url)
-    const html = await response.body
+    const isPrerender = autoDomains.includes( domainWithoutSuffix )
+    const html = isPrerender ? await getHtmlPptr(url) : await getHtml(url);
     const $ = cheerio.load(html);
 
     const sel = {
@@ -16,13 +42,13 @@ exports.handler = async function(event, context) {
         logo: 'meta[property="og:logo"],meta[itemprop="logo"]',
         image: 'meta[property="og:image:secure_url"],meta[property="og:image:url"],meta[property="og:image"],meta[name="twitter:image:src"],meta[name="twitter:image"],meta[itemprop="image"]',
     }
-    console.log($(sel.logo).attr('content'))
+
     const meta = {
         title: $(sel.title).attr('content'),
         description: $(sel.description).attr('content'),
-        publisher: $(sel.publisher).attr('content'),
-        logo: $(sel.logo).attr('content') ,
-        image: $(sel.image).attr('content'),
+        publisher: $(sel.publisher).attr('content') || domain,
+        logo: $(sel.logo).attr('content') || `https://unavatar.now.sh/${domain}`,
+        image: $(sel.image).attr('content') || `https://usecard.dsoto.dev/?url=${url}`,
     }
 
     return {

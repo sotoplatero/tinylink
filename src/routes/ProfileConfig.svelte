@@ -101,7 +101,7 @@
                 
                     <div 
                         id="links" 
-                        class="space-y-2"
+                        class="space-y-2 mb-12"
                         use:dndzone="{{ items: profile.links, flipDurationMs }}" 
                         on:finalize="{handleSort}"
                         on:consider={handleSort}    

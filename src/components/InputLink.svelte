@@ -8,15 +8,12 @@
     $: error = links.some(el=>el.url===link) ? "You already added this link" : null
 
     function handleEnter(e) {
-        if (e.key === 'Enter' ) {
+        if (e.key === 'Enter' && !error ) {
             add()
         }
-        
     }
     
     async function add(e) {
-        if (error) return
-
         let newlink = {
             id: links.length,
             url: link,
@@ -37,16 +34,9 @@
 
             } else {
                 
-                let response = await fetch( `https://api.microlink.io/?url=${link}` );
-                let { data } = await response.json()
-                newlink = { 
-                    ...newlink,
-                    title: data.author || data.title,
-                    publisher: data.publisher,
-                    logo: !!data.logo ? data.logo.url : `https://avatar.oxro.io/avatar.svg?name=${encodeURIComponent(data.publisher || data.title)}&background=6ab04c&color=000`,
-                    avatar: data.image.url || '',
-                };
-
+                let response = await fetch( `/api/meta?url=${link}` );
+                let data = await response.json()
+                newlink = { ...newlink, ...data  };
             }     
 
         }
