@@ -2,7 +2,7 @@ const chromium = require('chrome-aws-lambda');
 const got = require('got');
 const cheerio = require('cheerio');
 const { parse } = require('tldts')
-const autoDomains = require('./_util/auto-domains')
+const autoDomains = require('./_util/auto-domains.json')
 
 const getHtmlPptr = async url => {
 
@@ -21,10 +21,12 @@ const getHtmlPptr = async url => {
     return html;
 }
 
+
 const getHtml = async url => {
     const res = await got(url)
     return await res.body;
 }
+
 
 exports.handler = async function(event, context) { 
     
