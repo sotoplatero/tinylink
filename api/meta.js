@@ -46,8 +46,8 @@ exports.handler = async function(event, context) {
     }
 
     const meta = {
-        title: $(sel.title).attr('content'),
-        description: $(sel.description).attr('content'),
+        title: $(sel.title).attr('content') || $('title').text(),
+        description: $(sel.description).attr('content') | '',
         publisher: $(sel.publisher).attr('content') || domain,
         logo: $(sel.logo).attr('content') || `https://unavatar.now.sh/${domain}`,
         image: $(sel.image).attr('content') || `https://usecard.dsoto.dev/?url=${url}`,
