@@ -133,7 +133,7 @@
 
                                         <button 
                                             title="Delete Link"
-                                            on:click={()=>remove(index)} 
+                                            on:click={()=>remove(link.id)} 
                                             class="
                                                 text-gray-400 
                                                 hover:text-red-500 
