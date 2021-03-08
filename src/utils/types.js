@@ -9,7 +9,7 @@ module.exports = {
             return 'img' 
         }  
         
-        if ( /\.(pdf)$/.test(link)  ) return 'pdf'
+        if ( /\.pdf$/.test(link)  ) return 'pdf'
         
         if ( /^http(s)?\:\/\//.test(link) && typeof link === 'string' ) {
             return 'link' 

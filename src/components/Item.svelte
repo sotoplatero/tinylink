@@ -4,6 +4,7 @@
     import Title from './Title.svelte'
     import Image from './Image.svelte'   
     import Download from './Download.svelte'      
+    import Pulse from './Pulse.svelte'      
 
     export let link
 
@@ -13,6 +14,7 @@
         link: Link,
         img: Image,
         pdf: Download,
+        new: Pulse,
     }    
 
     $: component = components[link.type]

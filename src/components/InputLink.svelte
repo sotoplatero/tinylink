@@ -1,11 +1,12 @@
 <script>
+    import { profile } from '../store.js'
     import { isType } from '../utils/types.js'   
 
     export let links 
 
     let link;
     let error;
-    $: error = links.some(el=>el.url===link) ? "You already added this link" : null
+    $: error = links.some( el => el.url===link ) ? "You already added this link" : null
 
     function handleEnter(e) {
         if (e.key === 'Enter' && !error ) {
@@ -14,34 +15,13 @@
     }
     
     async function add(e) {
-        let newlink = {
-            id: links.length,
-            url: link,
-            type: isType(link),
-        }
 
-        if (newlink.type === 'link') {
-
-            let re = /(facebook\.com)|(instagram\.com)|(linkedin\.com)/
-            if (re.test(link)) {
-                
-                newlink = { 
-                    ...newlink,
-                    title: link.replace(/\/$/,'').split('/').reverse()[0],
-                    publisher: link.match(re)[0].split('.')[0],
-                    logo: 'https://unavatar.now.sh/' + link.match(re)[0],
-                };
-
-            } else {
-                
-                let response = await fetch( `/api/meta?url=${link}` );
-                let data = await response.json()
-                newlink = { ...newlink, ...data  };
-            }     
-
-        }
-
-        links = [ ...links, newlink ]
+        links = [ ...links, {
+                id: links.length,
+                url: link,
+                type: 'new',
+            }
+        ]
         
         link = '';
     }
@@ -58,10 +38,13 @@
             id="link" 
             autocomplete 
             placeholder="Ex. https://twitter.com/sotoplatero"
-            class="{ error ? 'border-red-500' : 'border-gray-300'} focus:{ error ? 'ring-red-500' : 'ring-blue-500'}" 
+            class="
+                pr-10
+                { error ? 'border-red-500' : 'border-gray-300'} 
+                focus:{ error ? 'ring-red-500' : 'ring-blue-500'}" 
         >   
             
-        <div class="absolute right-0 top-0 h-full flex items-center pr-3">
+        <div class="absolute right-0 top-0 h-full flex items-center mr-3">
             <button 
                 on:click="{add}" 
                 class="

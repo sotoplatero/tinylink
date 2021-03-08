@@ -1,8 +1,7 @@
 
 // src/store.js
 
-import { writable } from "svelte/store";
+import { writable, derived  } from "svelte/store";
 
-export const isAuthenticated = writable(false);
-export const user = writable({});
-
+export const profile = writable({ name:'', links:[] } );
+export const links= writable([]);

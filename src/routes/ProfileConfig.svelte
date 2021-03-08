@@ -1,8 +1,9 @@
 <script>
+    import { profile } from '../store.js'
 	import { onMount } from 'svelte';    
     import { navigate  } from "svelte-routing";    
     import { flip } from "svelte/animate"; 
-    import { dndzone } from "svelte-dnd-action";    
+    import { dndzone } from "svelte-dnd-action";  
 
     import Avatar from '../components/Avatar.svelte'
     import InputLink from '../components/InputLink.svelte'
@@ -13,59 +14,60 @@
  
     export let user
 
-    let profile = { name:'', links:[] } 
-
     onMount(async () => {
 
         if ( Object.keys(user).length === 0 ) {
             navigate("/", { replace: true });
         }    
-        console.log(Object.keys(user).length)
-
-        let responseProfile = await fetch(`/api/profile/?email=${user.email}`)
-        profile = await responseProfile.json()
-
-        if ( Object.keys(profile).length === 0 && profile.constructor === Object ) {
-            let localProfile = JSON.parse( localStorage.getItem('profile') || '{}' )
-
-            localProfile.links = localProfile.links.map(el => { 
-                let obj = { 
-                    id:profile.links.length, 
-                    url: el, 
-                    type: isType(el)
-                }
-                return (typeof el !== 'object') ? obj : {...el, type: 'link'}
-            })  
-
-            profile = { 
-                ...localProfile,
-                email: user.email,
-                name: user.userName,
-                slug: user.login,
-                avatar: user.avatar,
-            }
-
-            let response = await fetch('/api/save',{
-                method: 'POST',
-                body: JSON.stringify(profile)
-            });            
+        let response = await fetch(`/api/profile/?email=${user.email}`)
+        if (response.ok) {
+            let remoteProfile = await response.json()
+            profile.set(remoteProfile)
 
         }
+        // stored$profile.set(profileRemote)
+
+        // if ( Object.keys(profile).length === 0 && $profile.constructor === Object ) {
+        //     let localProfile = JSON.parse( localStorage.getItem('profile') || '{}' )
+
+        //     local$profile.links = local$profile.links.map(el => { 
+        //         let obj = { 
+        //             id:$profile.links.length, 
+        //             url: el, 
+        //             type: isType(el)
+        //         }
+        //         return (typeof el !== 'object') ? obj : {...el, type: 'link'}
+        //     })  
+
+        //     profile = { 
+        //         ...localProfile,
+        //         email: user.email,
+        //         name: user.userName,
+        //         slug: user.login,
+        //         avatar: user.avatar,
+        //     }
+
+        //     let response = await fetch('/api/save',{
+        //         method: 'POST',
+        //         body: JSON.stringify(profile)
+        //     });            
+
+        // }
 
 	});    
 
-    $: profile.avatar = profile.links.some(el=>el.avatar) ? profile.links.find(el=>el.avatar).avatar || '' : ''
+    $: $profile.avatar = $profile.links.some(el=>el.avatar) ? $profile.links.find(el=>el.avatar).avatar || '' : ''
     
     // REMOVE ITEMS
     function remove(index) {
-        profile.links.splice(index,1)
-        profile=profile
+        $profile.links.splice(index,1)
+        profile.set($profile)
     }
 
     // SORT
     const flipDurationMs = 300;    
     function handleSort(e) {
-        profile.links = e.detail.items;
+        profile.set({...$profile, links: e.detail.items})
     }
 
 </script>
@@ -73,16 +75,17 @@
 <svelte:head>
 	<title>Tinylink</title>
 </svelte:head>
-{#if user && profile}
-    <Nav {user} {profile}/>
+
+{#if user }
+    <!-- <Nav {user}/> -->
 {/if}
 <div class="w-full px-2 sm:px-0 sm:w-3/4 lg:w-2/4 xl:w-2/5 min-h-screen mx-auto">
 
     <main class="">
             <div class="space-y-4">
-                {#if profile.avatar}
+                {#if $profile.avatar}
                     <div class="text-center transition">
-                        <Avatar avatar={profile.avatar} />
+                        <Avatar avatar={$profile.avatar} />
                     </div>
                 {/if}
 
@@ -92,7 +95,7 @@
                         name="name"
                         autocomplete="off"
                         placeholder="Profile Name"
-                        bind:value={profile.name}
+                        bind:value={$profile.name}
                         class="w-full p-3 border rounded-lg font-semibold focus:ring-blue-500 focus:ring-2 outline-none border-gray-300" 
                     />    
                 </div>
@@ -102,18 +105,17 @@
                     <div 
                         id="links" 
                         class="space-y-2 mb-12"
-                        use:dndzone="{{ items: profile.links, flipDurationMs }}" 
+                        use:dndzone="{{ items: $profile.links, flipDurationMs }}" 
                         on:finalize="{handleSort}"
                         on:consider={handleSort}    
                     >
-                        {#each profile.links as link, index (link.id)}
+                        {#each $profile.links as link(link.id)}
                             <div 
                                 class="relative"  
                                 animate:flip={{duration:flipDurationMs}}
                             >
 
                                 <Item link={link} /> 
-
                                 <div 
                                     class="
                                         absolute 
@@ -152,13 +154,13 @@
                     </div>
                 
                     <div class="mt-4">
-                        <InputLink bind:links={profile.links} />
+                        <InputLink bind:links={$profile.links} />
                     </div> 
 
                 </div>
 
                 <div class="space-y-2">
-                    <BtnSave bind:profile/>
+                    <!-- <BtnSave bind:profile/> -->
                 </div>  
             </div>
 
