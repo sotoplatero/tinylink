@@ -1,8 +1,8 @@
 <script>
-    export let profile
+    import { profile } from '../store.js'    
     let saving = false
 
-    $: disabled = profile.name.trim().length===0 || profile.links.length===0 || saving
+    $: disabled = $profile.name.trim().length===0 || $profile.links.length===0 || saving
 
     async function save(){
         saving = true
@@ -11,12 +11,13 @@
             body: JSON.stringify(profile)
         });
         if (response.ok) {
-            profile = await response.json();
+            dataProfile = await response.json();
+            profile.set(dataProfile)
         }
         saving = false
-        if (typeof window !== 'undefined') {
-            localStorage.setItem('profile',JSON.stringify(profile))
-        }
+        // if (typeof window !== 'undefined') {
+        //     localStorage.setItem('profile',JSON.stringify(profile))
+        // }
     }
 </script>
 <button 

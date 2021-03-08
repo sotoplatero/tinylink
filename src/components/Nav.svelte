@@ -1,8 +1,8 @@
 <script>
+  import { profile } from '../store.js'  
   import {clickOutside} from '../utils/clickoutside.js'; 
 
   export let user
-  export let profile
   
   let showMenu = false
 </script>
@@ -20,8 +20,8 @@
         </div>
 
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-          {#if profile.id}
-            <a  href="/{profile.slug}" 
+          {#if $profile.id}
+            <a  href="/{$profile.slug}" 
                 target="_blank"
                 class="flex 
                     items-center 
@@ -31,7 +31,7 @@
                     font-bold 
                     hover:text-blue-600 
                     transition rounded-lg">
-                <span>/{profile.slug}</span>
+                <span>/{$profile.slug}</span>
                 <!-- <svg class="h-4 w-4 inline ml-2 opacity-75" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>                     -->
