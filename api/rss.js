@@ -13,7 +13,7 @@ exports.handler = async function(event, context) {
         const post = {
             site: feed.title,
             title: lastPost.title,
-            content: lastPost.content.slice(0,240),
+            content: lastPost.content.slice(0,240).replace(/(<([^>]+)>)/gi, "") + '...',
             url: lastPost.link,
             date: lastPost.updated,
         }
