@@ -19,40 +19,22 @@
         if ( Object.keys(user).length === 0 ) {
             navigate("/", { replace: true });
         }    
+
         let response = await fetch(`/api/profile/?email=${user.email}`)
+
         if (response.ok) {
-            let remoteProfile = await response.json()
-            if (!!remoteProfile) {
-            }
-            profile.set(remoteProfile)
-
-        }
-
-        if ( Object.keys(profile).length === 0 && $profile.constructor === Object ) {
-            let localProfile = JSON.parse( localStorage.getItem('profile') || '{}' )
-
-            local$profile.links = local$profile.links.map(el => { 
-                let obj = { 
-                    id:$profile.links.length, 
-                    url: el, 
-                    type: isType(el)
+            let dataProfile = await response.json()
+            if ( Object.keys(dataProfile).length === 0 ) {
+    
+               dataProfile = { 
+                    email: user.email,
+                    name: user.userName,
+                    slug: user.login,
+                    avatar: user.avatar,
                 }
-                return (typeof el !== 'object') ? obj : {...el, type: 'link'}
-            })  
-
-            profile = { 
-                ...localProfile,
-                email: user.email,
-                name: user.userName,
-                slug: user.login,
-                avatar: user.avatar,
+    
             }
-
-            let response = await fetch('/api/save',{
-                method: 'POST',
-                body: JSON.stringify(profile)
-            });            
-
+            profile.set( dataProfile )
         }
 
 	});    

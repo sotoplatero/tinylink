@@ -39,6 +39,7 @@
         "passport-google-oauth20": "^2.0.0",
         "passport-jwt": "^4.0.0",
         "puppeteer-core": "^8.0.0",
+        "rss-parser": "^3.12.0",
         "serverless-http": "^2.7.0",
         "sirv-cli": "^1.0.0",
         "slug": "^4.0.2",

@@ -11,8 +11,8 @@
             body: JSON.stringify($profile)
         });
         if (response.ok) {
-            let remoteProfile = await response.json();
-            profile.set(remoteProfile)
+            dataProfile = await response.json();
+            profile.set(dataProfile)
         }
         saving = false
         // if (typeof window !== 'undefined') {
@@ -32,7 +32,6 @@
         w-full 
         rounded-lg 
         disabled:opacity-50"
-    
 >
   {#if saving}
     <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
